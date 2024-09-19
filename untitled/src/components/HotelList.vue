@@ -48,14 +48,10 @@
         <el-input v-model="hotelForm.name" placeholder="Please input the hotel name"></el-input>
       </el-form-item>
       <el-form-item label="City" prop="city">
-        <el-select v-model="hotelForm.city" placeholder="Please select the city">
-          <el-option
-              v-for="city in Object.keys(districts)"
-              :key="city"
-              :label="city"
-              :value="city"
-          ></el-option>
-        </el-select>
+        <el-radio-group v-model="hotelForm.city">
+          <el-radio label="GUANG ZHOU">GUANG ZHOU</el-radio>
+          <el-radio label="SHEN ZHEN">SHEN ZHEN</el-radio>
+        </el-radio-group>
       </el-form-item>
       <el-form-item label="District" prop="district">
         <el-select v-model="hotelForm.district" placeholder="Please select the district">
@@ -116,15 +112,16 @@ export default {
   components: {CloseBold},
   data() {
     const nameValidator = (rule, value, callback) => {
-      const reg = /^[a-zA-Z]/;
+      const reg = /^[A-Za-z]+$/;
       if (value === '') {
         callback(new Error('Please input the hotel name'));
       } else if (!reg.test(value)) {
-        callback(new Error('The hotel name must start with a letter'));
+        callback(new Error('The hotel name must consist of English letters only'));
       } else {
         callback();
       }
     };
+
     const priceValidator = (rule, value, callback) => {
       const reg = /^[1-9]\d*$/;
       if (value === '') {
@@ -346,11 +343,13 @@ h1:hover {
 :deep(.el-dialog__title) {
   font-family: 'Lobster', cursive;
   font-size: 24px;
+  transition: 0.3s;
+}
+:deep(.el-dialog__title:hover) {
+  color: #42b983;
+  font-size: 32px;
 }
 
-:deep(.el-dialog__title:hover) {
-  transform: scale(1.15);
-}
 
 
 a {
