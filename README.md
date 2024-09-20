@@ -1,5 +1,5 @@
 # HotelList_ooad
-The first homework of ooad(write a beautiful front UI)
+The first homework of ooad(write a beautiful font end UI)
 
 The final UI is：
 
